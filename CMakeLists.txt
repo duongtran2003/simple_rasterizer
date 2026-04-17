@@ -11,9 +11,10 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 find_package(glm CONFIG REQUIRED)
 find_package(SDL2 CONFIG REQUIRED)
 
-file(GLOB_RECURSE SOURCES "src/*.cpp")
-
-add_executable(${PROJECT_NAME} ${SOURCES})
+add_executable(${PROJECT_NAME} 
+    src/main.cpp 
+    src/renderer.cpp
+)
 
 target_include_directories(${PROJECT_NAME} PRIVATE 
     src
