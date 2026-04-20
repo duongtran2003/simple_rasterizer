@@ -3,6 +3,7 @@
 #include "SDL_events.h"
 #include "SDL_keycode.h"
 #include "SDL_stdinc.h"
+#include <glm/fwd.hpp>
 #include <unordered_map>
 
 namespace SimpleRenderer {
@@ -22,6 +23,9 @@ public:
   bool isKeyPressed(SDL_Keycode key);
   bool isModifierKeyPressed(Uint16 key);
 
+  glm::vec2 getMousePos();
+  glm::vec2 getLastMousePos();
+
 private:
   Input();
 
@@ -29,5 +33,11 @@ private:
   std::unordered_map<Uint16, bool> modifierKeysPressed;
 
   bool shouldQuit;
+
+  Sint32 mouseX;
+  Sint32 mouseY;
+
+  Sint32 lastMouseX;
+  Sint32 lastMouseY;
 };
 } // namespace SimpleRenderer

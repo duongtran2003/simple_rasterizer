@@ -2,6 +2,9 @@
 #include "SDL_events.h"
 #include "SDL_keycode.h"
 #include "SDL_stdinc.h"
+#include <glm/fwd.hpp>
+#include <glm/glm.hpp>
+#include <iostream>
 #include <unordered_map>
 
 namespace SimpleRenderer {
@@ -28,16 +31,29 @@ bool Input::isModifierKeyPressed(Uint16 key) {
   return modifierKeysPressed[key];
 }
 
+glm::vec2 Input::getMousePos() { return glm::vec2(mouseX, mouseY); }
+
+glm::vec2 Input::getLastMousePos() { return glm::vec2(lastMouseX, lastMouseY); }
+
 void Input::processInput(SDL_Event &e) {
-  if (e.type == SDL_QUIT) {
+  switch (e.type) {
+  case SDL_QUIT:
     shouldQuit = true;
     return;
-  }
-
-  if (e.type == SDL_KEYDOWN) {
+  case SDL_KEYDOWN:
     keysPressed[e.key.keysym.sym] = true;
-  } else if (e.type == SDL_KEYUP) {
+    break;
+  case SDL_KEYUP:
     keysPressed[e.key.keysym.sym] = false;
+    break;
+  case SDL_MOUSEMOTION:
+    lastMouseX = mouseX;
+    lastMouseY = mouseY;
+    mouseX = e.motion.x;
+    mouseY = e.motion.y;
+    break;
+  default:
+    break;
   }
 }
 } // namespace SimpleRenderer
