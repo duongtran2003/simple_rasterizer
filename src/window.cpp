@@ -31,7 +31,7 @@ void Window::swapFramebuffer() const {
 
 void Window::closeWindow() { isRunning = false; }
 
-bool Window::isWindowRunning() { return isRunning; }
+bool Window::isWindowRunning() const { return isRunning; }
 
 Window::~Window() {
   if (framebuffer) {
