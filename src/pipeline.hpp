@@ -293,12 +293,19 @@ Pipeline<VertexType, VertexShaderOutput>::rasterize(
 
   float upper =
       glm::min(ss.v1.coords.y, glm::min(ss.v2.coords.y, ss.v3.coords.y));
+  upper = glm::max(0, (int)upper);
+
   float lower =
       glm::max(ss.v1.coords.y, glm::max(ss.v2.coords.y, ss.v3.coords.y));
+  lower = glm::min((int)bufferSize.y - 1, (int)lower);
+
   float left =
       glm::min(ss.v1.coords.x, glm::min(ss.v2.coords.x, ss.v3.coords.x));
+  left = glm::max(0, (int)left);
+
   float right =
       glm::max(ss.v1.coords.x, glm::max(ss.v2.coords.x, ss.v3.coords.x));
+  right = glm::min((int)bufferSize.x - 1, (int)right);
 
   float invW1 = 1.0f / primitive.v1.coords.w;
   float invW2 = 1.0f / primitive.v2.coords.w;
