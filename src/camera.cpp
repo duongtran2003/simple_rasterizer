@@ -1,4 +1,5 @@
 #include "camera.hpp"
+#include <glm/common.hpp>
 #include <glm/ext/matrix_clip_space.hpp>
 #include <glm/ext/matrix_transform.hpp>
 #include <glm/ext/vector_float3.hpp>
@@ -136,7 +137,7 @@ void Camera::processCameraAngle(glm::vec2 positionOffset, double deltaTime) {
                                -positionOffset.y * sensitivity.y * deltaTime);
 
   yaw += offset.x;
-  pitch += offset.y;
+  pitch = glm::clamp(pitch + offset.y, -89.0f, 89.0f);
 
   updateCameraVectors();
 }

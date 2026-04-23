@@ -76,7 +76,7 @@ glm::vec4 HelloWorldTrianglePipeline::fragmentShader(
   glm::vec4 color =
       glm::vec4(std::get<glm::vec3>(getUniform("u_cubeColor")), 1.0f);
 
-  float ambientStrength = 0.2f;
+  float ambientStrength = 0.1f;
   glm::vec4 ambientColor = color * ambientStrength;
 
   glm::vec3 interpolatedNormal =
